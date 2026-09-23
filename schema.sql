@@ -1,15 +1,22 @@
 create table if not exists public.site_settings (
   id integer primary key default 1 check (id = 1),
+  language text not null default 'zh' check (language in ('zh', 'en')),
   company_name text not null default 'GLOBAL PEOPLE',
   hero_title text not null default '连接全球优质人才与机会',
   hero_intro text not null default '从人才、资源到区域市场，建立一条清晰、可靠的全球连接路径。',
   company_intro text not null default '此处填写品牌故事、服务能力、办公地点或视频介绍。',
   section_one_title text not null default '连接全球优质人才与机会',
+  section_one_title_en text not null default 'Connect global talent and opportunity',
   section_one_intro text not null default '从人才、资源到区域市场，建立一条清晰、可靠的全球连接路径。',
+  section_one_intro_en text not null default 'Build a clear and reliable path connecting talent, resources, and regional markets.',
   section_two_title text not null default '认识我们的人才网络',
+  section_two_title_en text not null default 'Meet our talent network',
   section_two_intro text not null default '几十位专业人才的简介展示位。公司可以在后台替换姓名、职位、介绍和头像。',
+  section_two_intro_en text not null default 'A showcase for professional talent profiles. Replace names, roles, introductions, and images from the admin panel.',
   section_three_title text not null default '在世界各地发现可能',
+  section_three_title_en text not null default 'Discover possibilities worldwide',
   section_three_intro text not null default '选择区域，进入对应的人才与资源内容。',
+  section_three_intro_en text not null default 'Choose a region to explore its people and resource content.',
   customer_service_url text not null default 'https://example.com/customer-service',
   updated_at timestamptz not null default now()
 );

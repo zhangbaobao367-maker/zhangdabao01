@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="全球人才与资源展示落地页" />
+    <title>Global People & Resources</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="返回首页"><span class="brand-mark">GP</span><span>GLOBAL PEOPLE</span></a>
+      <nav class="top-nav" aria-label="主导航"><a href="#top" data-i18n="navHome">首页</a><a href="#middle" data-i18n="navPeople">人才网络</a><a href="#regions" data-i18n="navRegions">全球区域</a></nav>
+      <button class="header-cta open-form" type="button"><span data-i18n="submit">提交资料</span> <span>↗</span></button>
+    </header>
+
+    <main id="top">
+      <section class="cyber-panel panel-top section-shell">
+        <div class="panel-copy">
+          <p class="eyebrow">01 / GLOBAL SIGNAL</p>
+          <h1 id="sectionOneTitle">连接全球<br /><em>优质人才</em>与机会</h1>
+          <p class="panel-intro" id="sectionOneIntro">从人才、资源到区域市场，建立一条清晰、可靠的全球连接路径。这里的内容、图片和视频都可以由后台持续更新。</p>
+          <div class="hero-actions"><button class="primary-button open-form" type="button"><span data-i18n="leaveRequest">留下您的需求</span> <span>↗</span></button><a class="text-button" href="#middle"><span data-i18n="explore">向下探索</span> <span>↓</span></a></div>
+        </div>
+        <div class="media-orbit" id="topMedia" aria-label="首页图片和视频轮播"></div>
+      </section>
+      <section class="discount-banner section-shell" id="discountOne"><div><p class="eyebrow">FIRST PARTICIPATION / WELCOME</p><h2 data-discount-title>首次参与可获得 45% 的折扣</h2><p data-discount-intro>现在提交资料，领取您的专属优惠。</p></div><button class="primary-button open-form" type="button"><span data-i18n="claimDiscount">点击领取</span> <span>↗</span></button></section>
+
+      <section id="middle" class="cyber-panel panel-middle section-shell">
+        <div class="panel-copy">
+          <p class="eyebrow">02 / PEOPLE NETWORK</p>
+          <h2 id="sectionTwoTitle">认识我们的<br /><em>人才网络</em></h2>
+          <p class="panel-intro" id="sectionTwoIntro">几十位专业人才的简介展示位。公司可以在后台替换姓名、职位、介绍和头像，并持续增加内容。</p>
+          <button class="outline-button open-form" type="button"><span data-i18n="connect">加入沟通</span> ↗</button>
+        </div>
+        <div class="media-orbit people-media" id="peopleMedia" aria-label="人才图片轮播"></div>
+      </section>
+      <section class="discount-banner section-shell" id="discountTwo"><div><p class="eyebrow">PEOPLE NETWORK / OFFER</p><h2 data-discount-title>人才网络专属 35% 折扣</h2><p data-discount-intro>填写资料，领取人才网络专属优惠。</p></div><button class="primary-button open-form" type="button"><span data-i18n="claimDiscount">点击领取</span> <span>↗</span></button></section>
+
+      <section id="bottom" class="cyber-panel panel-bottom section-shell">
+        <div class="panel-copy">
+          <p class="eyebrow">03 / WORLD LIBRARY</p>
+          <h2 id="sectionThreeTitle">在世界各地<br /><em>发现可能</em></h2>
+          <p class="panel-intro" id="sectionThreeIntro">选择区域，进入对应的人才与资源内容。每个区域的卡片、照片和介绍都可以在后台管理。</p>
+          <a class="primary-button inline-button" href="#regions"><span data-i18n="viewRegions">查看全球区域</span> <span>↓</span></a>
+        </div>
+        <div class="media-orbit region-media" id="regionMedia" aria-label="区域图片和视频轮播"></div>
+      </section>
+      <section class="discount-banner section-shell" id="discountThree"><div><p class="eyebrow">GLOBAL REGIONS / OFFER</p><h2 data-discount-title>全球区域专属 25% 折扣</h2><p data-discount-intro>选择区域并提交资料，领取专属优惠。</p></div><button class="primary-button open-form" type="button"><span data-i18n="claimDiscount">点击领取</span> <span>↗</span></button></section>
+
+      <section id="regions" class="regions-section">
+        <div class="section-shell">
+          <div class="section-heading light"><div><p class="eyebrow">REGIONS / SELECT</p><h2><span data-i18n="chooseRegion">选择一个</span><br /><span data-i18n="globalRegions">全球区域</span></h2></div><p class="heading-side" data-i18n="regionIntro">每个区域都支持独立内容、至少 100 个资源卡片和分页展示。</p></div>
+          <div id="regionOptions" class="region-options"></div>
+        </div>
+      </section>
+
+    </main>
+
+    <button class="support-fab" id="supportFab" type="button" aria-label="打开在线客服"><span class="support-icon">✦</span><span data-i18n="support">在线客服</span><b>↗</b></button>
+    <div class="modal-backdrop" id="formModal" hidden><div class="modal" role="dialog" aria-modal="true" aria-labelledby="formTitle"><button class="modal-close" id="closeModal" aria-label="关闭">×</button><p class="eyebrow">START A CONVERSATION</p><h2 id="formTitle">留下您的资料</h2><p class="modal-subtitle">我们会在收到资料后尽快与您联系。标有 * 的为必填项。</p><form id="leadForm"><div class="form-grid"><label>姓名 *<input name="name" required placeholder="请输入姓名" /></label><label>邮箱 *<input name="email" type="email" required placeholder="name@company.com" /></label><label>电话<input name="phone" placeholder="+86 138 0000 0000" /></label><label>所在城市<input name="city" placeholder="请输入城市" /></label></div><div class="extra-fields"><label>需求类型<input name="topic" placeholder="验收后可替换为您的问题" /></label><label>补充说明<textarea name="message" rows="3" placeholder="还有什么想告诉我们？"></textarea></label></div><button class="primary-button submit-button" type="submit">提交资料 <span>↗</span></button><p class="form-status" id="formStatus" role="status"></p></form></div></div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script><script src="script.js"></script>
+  </body>
+</html>

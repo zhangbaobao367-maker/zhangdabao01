@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>选择全球区域 · Global People</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      body{min-height:100vh;background:#351520;color:#fff}.region-page{min-height:100vh;padding:44px 32px 70px}.region-page-head{max-width:1180px;margin:0 auto 54px;display:flex;justify-content:space-between;align-items:flex-end;gap:30px}.region-page h1{font-size:clamp(48px,7vw,88px);line-height:1;letter-spacing:-.08em;margin:0;color:#9bc9b2}.region-page-intro{max-width:330px;color:#e7c5b5;line-height:1.7;font-size:14px}.region-page .eyebrow{color:#9bc9b2}.region-page-options{max-width:1180px;margin:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.region-page-card{min-height:220px;padding:24px;border:1px solid #9a6570;background:linear-gradient(135deg,rgba(255,255,255,.09),rgba(255,255,255,.025));color:#fff;text-align:left;display:flex;flex-direction:column;justify-content:space-between;transition:.25s}.region-page-card:hover{background:#ff9b63;border-color:#ff9b63;color:#351520;transform:translateY(-5px)}.region-page-card .number{font-size:12px;letter-spacing:.16em;opacity:.65}.region-page-card strong{font-size:clamp(24px,3vw,36px);font-weight:500;letter-spacing:-.04em}.region-page-card small{font-size:12px;letter-spacing:.12em;opacity:.8}.region-page-card span:last-child{font-size:28px;align-self:flex-end}.region-back{display:inline-block;max-width:1180px;margin:0 auto 42px;position:relative;left:50%;transform:translateX(-50%);color:#e7c5b5;font-size:13px}.region-back:hover{color:#fff}.people-popover{position:fixed;inset:0;z-index:20;display:grid;place-items:center;padding:20px;background:rgba(20,7,13,.72);backdrop-filter:blur(8px)}.people-popover[hidden]{display:none}.people-dialog{position:relative;width:min(420px,100%);background:#f7eee8;color:#351520;border:1px solid #ff9b63;box-shadow:0 20px 70px rgba(0,0,0,.4);padding:14px}.people-dialog-close{position:absolute;z-index:1;top:8px;right:8px;border:0;background:#351520;color:#fff;width:32px;height:32px;border-radius:50%;font-size:20px}.people-dialog-image{width:100%;height:min(52vh,360px);object-fit:cover;background:#d8c4b8}.people-dialog-copy{padding:16px 8px 8px}.people-dialog-copy h2{margin:0 0 5px;font-size:26px}.people-dialog-copy p{margin:0;color:#704e4b;line-height:1.7}.people-dialog-meta{font-size:12px;letter-spacing:.12em;color:#9b665f;margin-bottom:10px}@media(max-width:560px){.region-page{padding:20px 14px 24px;min-height:100svh;box-sizing:border-box}.region-page-head{display:block;margin-bottom:16px}.region-page h1{font-size:clamp(34px,11vw,48px);line-height:.95}.region-page-intro{display:none}.region-page-options{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.region-page-card{min-height:0;height:clamp(96px,24svh,132px);padding:12px}.region-page-card .number{font-size:9px}.region-page-card strong{font-size:clamp(16px,5.5vw,23px)}.region-page-card small{font-size:8px;letter-spacing:.06em}.region-page-card span:last-child{font-size:18px}.region-back{margin-bottom:18px;font-size:12px}.people-dialog-image{height:42vh}}
+    </style>
+  </head>
+  <body>
+    <main class="region-page">
+      <a class="region-back" href="index.html">← 返回首页</a>
+      <header class="region-page-head">
+        <div><p class="eyebrow">REGIONS / SELECT</p><h1>选择一个<br />全球区域</h1></div>
+        <p class="region-page-intro">每个区域都支持独立内容、至少 100 个资源卡片和分页展示。</p>
+      </header>
+      <section class="region-page-options" id="regionOptions" aria-label="全球区域选择"></section>
+      <a class="floating-support" id="regionSupport" href="#" target="_blank" rel="noopener">客服</a>
+    </main>
+    <section class="people-popover" id="peoplePopover" hidden aria-live="polite">
+      <article class="people-dialog" role="dialog" aria-modal="true" aria-label="人才简介">
+        <button class="people-dialog-close" id="peopleClose" type="button" aria-label="关闭">×</button>
+        <img class="people-dialog-image" id="peopleImage" alt="" />
+        <div class="people-dialog-copy"><div class="people-dialog-meta" id="peopleMeta"></div><h2 id="peopleName"></h2><p id="peopleDescription"></p></div>
+      </article>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script>
+      (async () => {
+        const link = document.querySelector("#regionSupport");
+        try {
+          const client = window.supabase.createClient(window.SUPABASE_CONFIG.url, window.SUPABASE_CONFIG.publishableKey);
+          const { data } = await client.from("site_settings").select("customer_service_url").limit(1).maybeSingle();
+          if (data && data.customer_service_url) link.href = data.customer_service_url;
+          const { data: regions, error: regionsError } = await client.from("regions").select("id,name,english_name,sort_order").eq("is_visible", true).order("sort_order", { ascending: true });
+          if (regionsError) throw regionsError;
+          document.querySelector("#regionOptions").innerHTML = (regions || []).map((region, index) => `<button class="region-page-card" data-region-id="${region.id}" type="button"><span class="number">${String(index + 1).padStart(2, "0")}</span><strong>${region.name || ""}</strong><small>${region.english_name || ""}</small><span>↗</span></button>`).join("");
+          const { data: people, error } = await client.from("people").select("id,name,role,description,image_url,sort_order").eq("is_visible", true).order("sort_order", { ascending: true }).order("id", { ascending: true });
+          if (error) throw error;
+          const orderedPeople = people || [];
+          let current = 0;
+          const showPerson = () => {
+            if (!orderedPeople.length) return;
+            const person = orderedPeople[current % orderedPeople.length];
+            current += 1;
+            const regionNumber = ((current - 1) % 6) + 1;
+            const roundNumber = Math.floor((current - 1) / 6) + 1;
+            document.querySelector("#peopleMeta").textContent = `${regionNumber}-${roundNumber} · ${person.role || "GLOBAL PEOPLE"}`;
+            document.querySelector("#peopleName").textContent = person.name || "人才简介";
+            document.querySelector("#peopleDescription").textContent = person.description || "后台尚未填写个人简介。";
+            const image = document.querySelector("#peopleImage");
+            image.src = person.image_url || "https://placehold.co/800x600/351520/f7eee8?text=PEOPLE";
+            image.alt = person.name || "人才图片";
+            document.querySelector("#peoplePopover").hidden = false;
+          };
+          document.querySelector("#peopleClose").addEventListener("click", () => { document.querySelector("#peoplePopover").hidden = true; });
+          document.querySelector("#peoplePopover").addEventListener("click", (event) => { if (event.target.id === "peoplePopover") event.currentTarget.hidden = true; });
+          showPerson();
+          window.setInterval(showPerson, 1000);
+        } catch (error) {
+          console.error("Region page content could not be loaded:", error);
+        }
+      })();
+    </script>
+  </body>
+</html>

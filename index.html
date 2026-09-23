@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="全球人才与资源展示落地页" />
+    <title>Global People & Resources</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="返回首页"><span class="brand-mark">GP</span><span>GLOBAL PEOPLE</span></a>
+      <nav class="top-nav" aria-label="主导航">
+        <a href="#people">人才资源</a>
+        <a href="#regions">全球区域</a>
+        <a href="#library">资源库</a>
+      </nav>
+      <button class="header-cta open-form" type="button">提交资料 <span>↗</span></button>
+    </header>
+
+    <main id="top">
+      <section class="hero section-shell">
+        <div class="hero-copy">
+          <p class="eyebrow">GLOBAL TALENT NETWORK · 2026</p>
+          <h1>连接全球<br /><em>优质人才</em>与机会</h1>
+          <p class="hero-intro">从人才、资源到区域市场，建立一条清晰、可靠的全球连接路径。这里的每一张卡片，都可以由您的团队自由填充。</p>
+          <div class="hero-actions">
+            <a class="primary-button" href="#people">查看人才资源 <span>↓</span></a>
+            <button class="text-button open-form" type="button">留下您的需求 <span>↗</span></button>
+          </div>
+        </div>
+        <div class="hero-art" aria-label="品牌视觉占位区域">
+          <div class="orb orb-one"></div><div class="orb orb-two"></div>
+          <div class="hero-note"><strong>YOUR STORY</strong><span>待填入品牌图片 / 视频</span></div>
+        </div>
+      </section>
+
+      <section id="people" class="people-section section-shell">
+        <div class="section-heading">
+          <div><p class="eyebrow">01 / PEOPLE</p><h2>认识我们的<br /><span>人才资源</span></h2></div>
+          <div class="heading-side"><p>几十位专业人才的简介轮播位。验收后可替换图片、姓名、职位和介绍。</p><div class="slider-controls"><button id="peoplePrev" aria-label="上一组">←</button><button id="peopleNext" aria-label="下一组">→</button></div></div>
+        </div>
+        <div id="peopleTrack" class="people-track"></div>
+        <div class="progress-line"><span id="peopleProgress"></span></div>
+        <div class="company-intro"><div><p class="eyebrow">ABOUT COMPANY</p><h3>公司资料展示区域</h3></div><p>此处留给公司填入品牌故事、服务能力、办公地点、合作数据或视频介绍。建议使用 2–3 段简洁内容，让访客快速了解公司。</p><button class="outline-button open-form" type="button">了解更多 ↗</button></div>
+      </section>
+
+      <section id="regions" class="regions-section">
+        <div class="section-shell">
+          <div class="section-heading light"><div><p class="eyebrow">02 / REGIONS</p><h2>在世界各地<br /><span>发现可能</span></h2></div><p class="heading-side">选择一个区域，进入该区域的人才与资源详情页。每个分类均支持多页展示。</p></div>
+          <div id="regionOptions" class="region-options"></div>
+        </div>
+        <div class="runways" aria-label="区域照片自由轮播">
+          <div class="runway runway-left" id="runwayLeft"></div>
+          <div class="runway runway-right" id="runwayRight"></div>
+        </div>
+      </section>
+
+      <section id="library" class="library-section section-shell">
+        <div class="library-top"><div><p class="eyebrow">03 / LIBRARY</p><h2 id="libraryTitle">全球资源库</h2><p id="libraryDescription">选择上方区域，查看该区域的详细资源。</p></div><button class="outline-button open-form" type="button">发布您的需求 ↗</button></div>
+        <div id="libraryGrid" class="library-grid"></div>
+        <div class="pagination" id="pagination"></div>
+      </section>
+    </main>
+
+    <button class="support-fab" id="supportFab" type="button" aria-label="打开在线客服"><span class="support-icon">✦</span><span>在线客服</span><b>↗</b></button>
+
+    <div class="modal-backdrop" id="formModal" hidden>
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="formTitle">
+        <button class="modal-close" id="closeModal" aria-label="关闭">×</button>
+        <p class="eyebrow">START A CONVERSATION</p><h2 id="formTitle">留下您的资料</h2><p class="modal-subtitle">我们会在收到资料后尽快与您联系。标有 * 的为必填项。</p>
+        <form id="leadForm">
+          <div class="form-grid"><label>姓名 *<input name="name" required placeholder="请输入姓名" /></label><label>邮箱 *<input name="email" type="email" required placeholder="name@company.com" /></label><label>电话<input name="phone" placeholder="+86 138 0000 0000" /></label><label>所在城市<input name="city" placeholder="请输入城市" /></label></div>
+          <div class="extra-fields"><label>需求类型<input name="topic" placeholder="验收后可替换为您的问题" /></label><label>补充说明<textarea name="message" rows="3" placeholder="还有什么想告诉我们？"></textarea></label></div>
+          <button class="primary-button submit-button" type="submit">提交资料 <span>↗</span></button><p class="form-status" id="formStatus" role="status"></p>
+        </form>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
